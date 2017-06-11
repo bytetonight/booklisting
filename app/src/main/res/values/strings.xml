@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Book Listing</string>
+    <string name="hint_enter_book_name">Your Search Term</string>
+    <string name="btn_share_text">Share</string>
+    <string name="btn_learn_more_text">Learn more</string>
+    <string name="no_description">No description</string>
+    <string name="no_authors">No Authors</string>
+    <string name="written_by">By </string>
+    <string name="strNoRecordsFound">No Results found</string>
+    <string name="noInternetConnection">No Internet Connection</string>
+    <string name="title_activity_details">Details</string>
+</resources>

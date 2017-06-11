@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_item_container_padding">4dp</dimen>
+    <dimen name="list_item_container_top_margin">4dp</dimen>
+    <dimen name="list_item_header_height">100dp</dimen>
+    <dimen name="list_item_action_text_margin">8dp</dimen>
+</resources>
