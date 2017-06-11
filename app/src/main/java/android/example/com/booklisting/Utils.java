@@ -5,7 +5,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,6 +30,13 @@ import java.util.List;
 public class Utils {
     public static final String LOG_TAG = Utils.class.getName();
     public static final String ARG_BOOK = "arg_book";
+    public static final String KEY_ITEMS = "items";
+    public static final String KEY_VOLUME_INFO = "volumeInfo";
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_AUTHORS = "authors";
+    public static final String KEY_IMAGE_LINKS = "imageLinks";
+    public static final String KEY_THUMBNAIL = "thumbnail";
 
     /**
      * Returns new URL object from the given string URL.
@@ -113,21 +122,26 @@ public class Utils {
 
         try {
             JSONObject root = new JSONObject(response);
-            if (root.has("items")) {
-                JSONArray bookArray = root.getJSONArray("items"); //JSON Node named items
+
+             //Uncomment the 2 lines below to raise a JSONException, and see how it's handled
+            //if (true)
+            //throw new JSONException("Some Element was not found... yada");
+
+            if (root.has(KEY_ITEMS)) {
+                JSONArray bookArray = root.getJSONArray(KEY_ITEMS); //JSON Node named items
                 for (int i = 0; i < bookArray.length(); i++) {
 
                     JSONObject currentBook = bookArray.getJSONObject(i);
 
-                    JSONObject volumeInfo = currentBook.getJSONObject("volumeInfo");
+                    JSONObject volumeInfo = currentBook.getJSONObject(KEY_VOLUME_INFO);
 
-                    String title = volumeInfo.getString("title");
+                    String title = volumeInfo.getString(KEY_TITLE);
 
 
                     List<String> authors = new ArrayList<String>();
 
-                    if (volumeInfo.has("authors")) {
-                        JSONArray authorsArray = volumeInfo.getJSONArray("authors");
+                    if (volumeInfo.has(KEY_AUTHORS)) {
+                        JSONArray authorsArray = volumeInfo.getJSONArray(KEY_AUTHORS);
                         for (int j = 0; j < authorsArray.length(); j++) {
                             authors.add(authorsArray.getString(j));
                         }
@@ -135,14 +149,14 @@ public class Utils {
 
                     String description = "";
 
-                    if (volumeInfo.has("description")) {
-                        description = volumeInfo.getString("description");
+                    if (volumeInfo.has(KEY_DESCRIPTION)) {
+                        description = volumeInfo.getString(KEY_DESCRIPTION);
                     }
 
                     String thumbnailLink = "";
-                    if (volumeInfo.has("imageLinks")) {
-                        JSONObject imageLinks = volumeInfo.getJSONObject("imageLinks");
-                        thumbnailLink = imageLinks.getString("thumbnail");
+                    if (volumeInfo.has(KEY_IMAGE_LINKS)) {
+                        JSONObject imageLinks = volumeInfo.getJSONObject(KEY_IMAGE_LINKS);
+                        thumbnailLink = imageLinks.getString(KEY_THUMBNAIL);
                     }
                     Book book = new Book(context, title, authors, description, thumbnailLink);
 
@@ -151,7 +165,10 @@ public class Utils {
             }
 
         } catch (JSONException e) {
-            Log.e(LOG_TAG, "Problem parsing JSON results", e);
+            Log.e(LOG_TAG, context.getString(R.string.json_error), e);
+            EventBus.getDefault().post(new
+                    MessageEvent(context.getString(R.string.json_error)+
+                    "\n"+e.getMessage()));
         }
         return books;
     }
@@ -174,4 +191,5 @@ public class Utils {
         return activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
     }
+
 }

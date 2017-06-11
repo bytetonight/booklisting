@@ -13,13 +13,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Book>> {
+public class MainActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<List<Book>>{
 
     //"https://www.googleapis.com/books/v1/volumes?q=";
     private static final String API_ENDPOINT = "https://www.googleapis.com/books/v1/volumes";
@@ -69,6 +75,19 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
@@ -136,6 +155,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
 
+
     @Override
     public void onLoadFinished(Loader<List<Book>> loader, List<Book> data) {
         loadingIndicator.setVisibility(View.GONE);
@@ -160,5 +180,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<List<Book>> loader) {
         prepareRecyclerView();
+    }
+
+    // This method will be called when a MessageEvent is posted (in the UI thread for Toast)
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        Toast.makeText(MainActivity.this, event.message, Toast.LENGTH_SHORT).show();
     }
 }

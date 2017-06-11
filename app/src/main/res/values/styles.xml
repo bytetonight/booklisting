@@ -43,8 +43,8 @@
     </style>
 
     <style name="list_item_header_image">
-        <item name="android:layout_width">100dp</item>
-        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_width">@dimen/list_item_header_height</item>
+        <item name="android:layout_height">@dimen/list_item_header_height</item>
         <item name="android:gravity">left</item>
         <item name="android:layout_gravity">left</item>
         <item name="android:adjustViewBounds">true</item>
@@ -99,17 +99,17 @@
     <style name="search_text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">16dp</item>
+        <item name="android:layout_margin">@dimen/search_btn_top_margin</item>
     </style>
 
     <style name="search_button">
-        <item name="android:layout_width">24dp</item>
-        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_width">@dimen/search_button_icon_dimen</item>
+        <item name="android:layout_height">@dimen/search_button_icon_dimen</item>
         <item name="android:layout_alignBottom">@id/search_text</item>
         <item name="android:layout_alignParentRight">true</item>
 
-        <item name="android:layout_marginRight">24dp</item>
-        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginRight">@dimen/search_button_icon_dimen</item>
+        <item name="android:layout_marginBottom">@dimen/search_btn_top_margin</item>
     </style>
 
     <style name="Widget.AppCompat.ProgressBar.blurb">
@@ -122,6 +122,43 @@
     <style name="main_activity_root">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="details_activity_root">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="details_activity_dummy_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/constraint_view_padding</item>
+        <item name="android:layout_marginLeft">@dimen/constraint_view_padding</item>
+        <item name="android:layout_marginBottom">@dimen/constraint_view_padding</item>
+        <item name="android:layout_marginTop">@dimen/constraint_view_padding</item>
+    </style>
+
+    <style name="one_of_the_things_I_hate_about_styles_is_choosing_a_name_for_nothingness">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="empty_view" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="thank_god_styles_can_be_extracted_and_I_found_out">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="you_have_no_idea_how_much_I_hate_this">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
     </style>
 

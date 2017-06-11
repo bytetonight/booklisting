@@ -11,4 +11,5 @@
     <string name="title_activity_details">Details</string>
     <string name="details_activity_content">Will implement later</string>
     <string name="please_enter_search_term">Please enter a Search Term</string>
+    <string name="json_error">Problem parsing JSON results</string>
 </resources>

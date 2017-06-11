@@ -4,4 +4,7 @@
     <dimen name="list_item_container_top_margin">4dp</dimen>
     <dimen name="list_item_header_height">100dp</dimen>
     <dimen name="list_item_action_text_margin">8dp</dimen>
+    <dimen name="constraint_view_padding">8dp</dimen>
+    <dimen name="search_button_icon_dimen">24dp</dimen>
+    <dimen name="search_btn_top_margin">16dp</dimen>
 </resources>

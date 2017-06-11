@@ -5,10 +5,7 @@
     tools:context="android.example.com.booklisting.MainActivity"
     style="@style/main_activity_root">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+    <RelativeLayout style="@style/one_of_the_things_I_hate_about_styles_is_choosing_a_name_for_nothingness">
 
         <EditText
             android:id="@+id/search_text"
@@ -33,11 +30,9 @@
 
     <TextView
         android:id="@+id/empty"
-        style="@android:style/TextAppearance.Large"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
-        android:text="@string/strNoRecordsFound" />
+
+        android:text="@string/strNoRecordsFound"
+        style="@style/empty_view" />
 
 
 
