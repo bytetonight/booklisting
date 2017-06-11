@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             emptyText.setText(R.string.please_enter_search_term);
         else
             emptyText.setText(R.string.strNoRecordsFound);
+
+        prepareRecyclerView();
     }
 
     @Override
