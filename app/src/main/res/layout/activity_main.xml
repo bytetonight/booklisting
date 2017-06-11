@@ -2,10 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="android.example.com.booklisting.MainActivity">
+    tools:context="android.example.com.booklisting.MainActivity"
+    style="@style/main_activity_root">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,33 +12,20 @@
 
         <EditText
             android:id="@+id/search_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:hint="@string/hint_enter_book_name"
-            android:layout_margin="16dp"/>
+            style="@style/search_text" />
 
         <ImageView
             android:id="@+id/searchButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignBottom="@id/search_text"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="24dp"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_search_black_24dp"/>
+            android:src="@drawable/ic_search_black_24dp"
+            style="@style/search_button" />
 
     </RelativeLayout>
 
     <!-- Loading indicator is only shown before the first load -->
     <ProgressBar
         android:id="@+id/loading_indicator"
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:indeterminate="true"
-        />
+        style="@style/Widget.AppCompat.ProgressBar.blurb" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"
