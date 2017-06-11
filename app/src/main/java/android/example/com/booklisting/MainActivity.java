@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final String API_ENDPOINT = "https://www.googleapis.com/books/v1/volumes";
     private static final String BOOK_LIST = "booklist";
     private static final int LOADER_ID = 0;
+    private static boolean firstRun = true;
     private List<Book> items = new ArrayList<>();
     private BookAdapter adapter;
     private RecyclerView recyclerView;
@@ -44,6 +45,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         emptyText = (TextView) findViewById(R.id.empty);
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         imageViewSearch.setOnClickListener(clickListener);
+        if (firstRun)
+            emptyText.setText(R.string.please_enter_search_term);
+        else
+            emptyText.setText(R.string.strNoRecordsFound);
     }
 
     @Override
@@ -73,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             needle = needle.replace(" ", "+");
 
             if (Utils.hasConnection(MainActivity.this)) {
+                emptyText.setText("");
+                firstRun = false;
                 startTheLoadingStuff(needle);
             } else {
                 loadingIndicator.setVisibility(View.GONE);
@@ -128,8 +135,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<List<Book>> loader, List<Book> data) {
         loadingIndicator.setVisibility(View.GONE);
-        this.items = data;
-        prepareRecyclerView();
+        if (data.isEmpty())
+            emptyText.setText(R.string.strNoRecordsFound);
+        else {
+            this.items = data;
+            prepareRecyclerView();
+        }
     }
 
     /**
@@ -141,6 +152,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
      */
     @Override
     public void onLoaderReset(Loader<List<Book>> loader) {
-
+        prepareRecyclerView();
     }
 }
