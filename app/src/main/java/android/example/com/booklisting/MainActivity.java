@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 startTheLoadingStuff(needle);
             } else {
                 loadingIndicator.setVisibility(View.GONE);
+                items.clear();
+                adapter.notifyDataSetChanged();
                 emptyText.setText(R.string.noInternetConnection);
             }
         }
@@ -135,12 +137,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<List<Book>> loader, List<Book> data) {
         loadingIndicator.setVisibility(View.GONE);
-        if (data.isEmpty())
+        if (data == null || data.isEmpty()) {
+            items.clear();
             emptyText.setText(R.string.strNoRecordsFound);
+        }
         else {
             this.items = data;
             prepareRecyclerView();
         }
+        adapter.notifyDataSetChanged();
     }
 
     /**
